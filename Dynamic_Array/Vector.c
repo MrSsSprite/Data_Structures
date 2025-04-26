@@ -70,12 +70,14 @@ void *vector_end(struct vector *this)
 int vector_insert(struct vector *this, void *restrict dest,
                   const void *restrict first, size_t n)
 {
-   size_t vec_space = this->ed - this->cav, req_space = n * this->elem_sz;
+   size_t vec_space = this->ed - this->cav, req_space = n * this->elem_sz,
+          pos = dest - this->st;
 
    /* Ensure that the vector has enough cavity */
    if (vec_space < req_space &&
-       _vector_resize(this, (this->ed - this->st + (vec_space - req_space))))
+       _vector_resize(this, (this->ed - this->st + (req_space - vec_space))))
       return 1;
+   dest = this->st + pos;
    /* move existing data backward */
    memmove(dest + req_space, dest, this->cav - dest);
    /* copy the data from first */
