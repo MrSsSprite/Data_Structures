@@ -18,7 +18,7 @@ typedef void (*Queue_Adaptor_destructor)(void*);
  *          NULL if failed
  * @see     List
  */
-void *Queue_Linked_List_init(void *list);
+void *queue_linked_list_init(void *list);
 /*---------------------- Public Function Prototypes END ----------------------*/
 
 /*----------------------------- Public Variables -----------------------------*/

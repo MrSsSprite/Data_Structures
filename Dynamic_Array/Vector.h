@@ -20,10 +20,10 @@ void vector_destroy(struct vector *this);
 size_t vector_size(struct vector *this);
 size_t vector_capacity(struct vector *this);
 
-int vector_push(struct vector *this, void *item);
+int vector_push(struct vector *this, const void *item);
 int vector_pop(struct vector *this);
 int vector_insert(struct vector *this, void *restrict dest,
-                  void *restrict first, size_t n);
+                  const void *restrict first, size_t n);
 int vector_erase(struct vector *this, void *first, size_t n);
 
 void *vector_begin(struct vector *this);

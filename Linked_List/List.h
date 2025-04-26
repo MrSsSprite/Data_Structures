@@ -23,12 +23,12 @@ typedef struct list_node *List_Node;
 /*---------------------------- Public Macros END -----------------------------*/
 
 /*------------------------ Public Function Prototypes ------------------------*/
-List List_init_elem_sz(size_t elem_size);
-void List_destroy(List this);
-int List_push(List this, void *elem);
-void List_pop(List this);
-List_Node List_head(List this);
-size_t List_size(List this);
+List list_init_elem_sz(size_t elem_size);
+void list_destroy(List this);
+int list_push(List this, const void *restrict elem);
+void list_pop(List this);
+List_Node list_head(List this);
+size_t list_size(List this);
 /*---------------------- Public Function Prototypes END ----------------------*/
 
 #endif

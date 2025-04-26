@@ -44,7 +44,7 @@ size_t vector_size(struct vector *this)
 size_t vector_capacity(struct vector *this)
 { return (this->ed - this->st) / this->elem_sz; }
 
-int vector_push(struct vector *this, void *item)
+int vector_push(struct vector *this, const void *item)
 {
    if (this->cav == this->ed && _vector_expand(this))
       return 1;
@@ -68,7 +68,7 @@ void *vector_end(struct vector *this)
 { return this->cav; }
 
 int vector_insert(struct vector *this, void *restrict dest,
-                  void *restrict first, size_t n)
+                  const void *restrict first, size_t n)
 {
    size_t vec_space = this->ed - this->cav, req_space = n * this->elem_sz;
 

@@ -10,7 +10,7 @@
 /*--------------------------- Private Structs END ----------------------------*/
 
 /*---------------------------- Exported Functions ----------------------------*/
-struct list *List_init_elem_sz(size_t elem_size)
+struct list *list_init_elem_sz(size_t elem_size)
 {
    struct list *this = malloc(sizeof (struct list));
    if (this == NULL)
@@ -22,7 +22,7 @@ struct list *List_init_elem_sz(size_t elem_size)
    return this;
 }
 
-void List_destroy(struct list *this)
+void list_destroy(struct list *this)
 {
    struct list_node *iter[2];
    int i = 0;
@@ -37,7 +37,7 @@ void List_destroy(struct list *this)
    free(this);
 }
 
-int List_push(struct list *this, void *elem)
+int list_push(struct list *this, const void *restrict elem)
 {
    struct list_node *new_node;
    new_node = malloc(sizeof(struct list_node) + this->elem_size);
@@ -50,7 +50,7 @@ int List_push(struct list *this, void *elem)
    return 0;
 }
 
-void List_pop(struct list *this)
+void list_pop(struct list *this)
 {
    struct list_node *iter = this->head;
    this->head = iter->next;
@@ -58,12 +58,12 @@ void List_pop(struct list *this)
    free(iter);
 }
 
-struct list_node *List_head(struct list *this)
+struct list_node *list_head(struct list *this)
 {
    return this->head;
 }
 
-size_t List_size(struct list *this)
+size_t list_size(struct list *this)
 {
    return this->size;
 }

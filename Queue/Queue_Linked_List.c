@@ -19,7 +19,7 @@ struct queue_linked_list
 /*---------------------- Private Function Declarations -----------------------*/
 static void queue_linked_list_destroy(struct queue_linked_list *this);
 static int queue_linked_list_enqueue
-(struct queue_linked_list *this, void *elem);
+(struct queue_linked_list *this, const void *restrict elem);
 static void queue_linked_list_dequeue(struct queue_linked_list *this);
 static void *queue_linked_list_front(struct queue_linked_list *this);
 static size_t queue_linked_list_size(struct queue_linked_list *this);
@@ -36,7 +36,7 @@ const struct queue_toolbox Queue_Linked_List_toolbox =
 /*-------------------------- Exported Variables END --------------------------*/
 
 /*---------------------------- Exported Functions ----------------------------*/
-void *Queue_Linked_List_init(void *list)
+void *queue_linked_list_init(void *list)
 {
    List container = list;
    struct queue_linked_list *this = malloc(sizeof(struct queue_linked_list));
@@ -66,7 +66,7 @@ static void queue_linked_list_destroy(struct queue_linked_list *this)
 }
 
 
-static int queue_linked_list_enqueue(struct queue_linked_list *this, void *elem)
+static int queue_linked_list_enqueue(struct queue_linked_list *this, const void *restrict elem)
 {
    List_Node new_node;
    int err_code;
@@ -86,7 +86,7 @@ static int queue_linked_list_enqueue(struct queue_linked_list *this, void *elem)
    }
    else
    {
-      err_code = List_push(this->container, elem);
+      err_code = list_push(this->container, elem);
       if (err_code) return err_code;
       this->tail = this->container->head;
    }
@@ -97,14 +97,14 @@ static int queue_linked_list_enqueue(struct queue_linked_list *this, void *elem)
 
 static void queue_linked_list_dequeue(struct queue_linked_list *this)
 {
-   List_pop(this->container);
+   list_pop(this->container);
    if (this->container->size == 0) this->tail = NULL;
 }
 
 
 static void *queue_linked_list_front(struct queue_linked_list *this)
 {
-   return List_head(this->container);
+   return list_head(this->container);
 }
 
 
